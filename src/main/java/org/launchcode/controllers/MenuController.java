@@ -34,7 +34,7 @@ public class MenuController {
         model.addAttribute("menus", menuDao.findAll());
         model.addAttribute("title", "Menus");
 
-        return "cheese/index";
+        return "menu/index";
     }
 
     /**
@@ -63,9 +63,12 @@ public class MenuController {
     @RequestMapping(value = "view/{menuId}", method = RequestMethod.GET)
     public String viewMenu(@PathVariable int menuId, Model model) {
 
-        model.addAttribute("menu", menuDao.findOne(menuId));
+        Menu menu = menuDao.findOne(menuId);
+        model.addAttribute("title", menu.getName());
+        model.addAttribute("cheeses", menu.getCheeses());
+        model.addAttribute("menuId", menu.getId());
 
-        return "view";
+        return "menu/view";
     }
 
     @RequestMapping(value = "add-item/{menuId}", method = RequestMethod.GET)
@@ -80,7 +83,7 @@ public class MenuController {
        model.addAttribute("form", form);
        model.addAttribute("title", "Add item to menu: " + currentMenu.getName());
 
-        return "add-item";
+        return "menu/add-item";
     }
 
     @RequestMapping(value = "add-item", method = RequestMethod.POST)
@@ -89,6 +92,13 @@ public class MenuController {
 
         if (errors.hasErrors()) {
             model.addAttribute("title", "Add Item");
+            model.addAttribute("form", theMenu);
+            System.out.println(theMenu.getCheeseId());
+            System.out.println(theMenu.getCheeseId());System.out.println(theMenu.getCheeseId());System.out.println(theMenu.getCheeseId());
+            System.out.println(theMenu.getCheeseId());System.out.println(theMenu.getCheeseId());
+            System.out.println(theMenu.getCheeseId());System.out.println(theMenu.getCheeseId());
+
+
             return "menu/add-item";
         }
 
